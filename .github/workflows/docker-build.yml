@@ -11,8 +11,8 @@ on:
         description: "ghcr endpoint on which the package will be published"
         required: true
         type: string
-      path:
-        description: "path pointing to build informations"
+      root:
+        description: "build root location"
         required: true
         type: string
     secrets:
@@ -33,7 +33,7 @@ jobs:
 
       - name: Build image
         run: |
-          docker build --no-cache -t ${{ github.sha }} ${{ inputs.path }}
+          docker build --no-cache -t ${{ github.sha }} ${{ inputs.root }}
 
       - name: Tag image
         if: ${{ github.ref == format('refs/heads/{0}', inputs.branch) && inputs.endpoint != 'user/endpoint' }}
