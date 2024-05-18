@@ -6,12 +6,15 @@ on:
       branch:
         description: "repo branch containing build information"
         required: true
+        type: string
       endpoint:
         description: "ghcr endpoint on which the package will be published"
         required: true
+        type: string
       path:
         description: "path pointing to build informations"
-        required: false
+        required: true
+        type: string
     secrets:
       username:
         description: "A github username under which packages will be published"
