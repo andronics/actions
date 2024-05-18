@@ -33,7 +33,7 @@ jobs:
 
       - name: Build image
         run: |
-          docker build --no-cache -t ${{ github.sha }} ${{ inputs.root }}
+          docker build --no-cache -t ${{ github.sha }} ./universal-templar
 
       - name: Tag image
         if: ${{ github.ref == format('refs/heads/{0}', inputs.branch) && inputs.endpoint != 'user/endpoint' }}
