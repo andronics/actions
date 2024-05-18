@@ -13,13 +13,11 @@ on:
         type: string
       path:
         description: "path pointing to build informations"
-        default: '.'
         required: false
         type: string
     secrets:
       username:
         description: "A github username under which packages will be published"
-        default: 'andronics'
         required: false
         type: string
       pat:
