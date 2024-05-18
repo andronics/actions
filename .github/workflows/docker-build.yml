@@ -36,7 +36,7 @@ jobs:
           docker build --no-cache -t ${{ github.sha }} ./universal-templar
 
       - name: Tag image
-        if: ${{ github.ref == format('refs/heads/{0}', inputs.branch) && inputs.endpoint != 'user/endpoint' }}
+        # if: ${{ github.ref == format('refs/heads/{0}', inputs.branch) && inputs.endpoint != 'user/endpoint' }}
         run: |
           docker tag ${{ github.sha }} ${{ inputs.endpoint }}
           docker tag ${{ github.sha }} ${{ inputs.endpoint }}:${{ github.sha }}
@@ -44,7 +44,7 @@ jobs:
           docker tag ${{ github.sha }} ghcr.io/${{ inputs.endpoint }}:${{ github.sha }}
 
       - name: Credential check
-        if: ${{ github.ref == format('refs/heads/{0}', env.BRANCH) && env.ENDPOINT != 'user/endpoint' }}
+        # if: ${{ github.ref == format('refs/heads/{0}', env.BRANCH) && env.ENDPOINT != 'user/endpoint' }}
         run: |
           echo "CR_USER=${{ secrets.username }}" >> $GITHUB_ENV
           echo "CR_PAT=${{ secrets.pat }}" >> $GITHUB_ENV
@@ -55,12 +55,12 @@ jobs:
           fi
 
       - name: Login to GitHub Container Registry
-        if: ${{ github.ref == format('refs/heads/{0}', env.BRANCH) && env.CR_USER && env.CR_PAT && env.ENDPOINT != 'user/endpoint' }}
+        # if: ${{ github.ref == format('refs/heads/{0}', env.BRANCH) && env.CR_USER && env.CR_PAT && env.ENDPOINT != 'user/endpoint' }}
         run: |
           echo "${{ secrets.pat }}" | docker login ghcr.io -u ${{ secrets.username }} --password-stdin
 
       - name: Push tags to GitHub Container Registry
-        if: ${{ github.ref == format('refs/heads/{0}', env.BRANCH) && env.CR_USER && env.CR_PAT && env.ENDPOINT != 'user/endpoint' }}
+        # if: ${{ github.ref == format('refs/heads/{0}', env.BRANCH) && env.CR_USER && env.CR_PAT && env.ENDPOINT != 'user/endpoint' }}
         run: |
           docker push ghcr.io/${{ inputs.endpoint }}:${{ github.sha }}
           docker push ghcr.io/${{ inputs.endpoint }}
